@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <style>
+      /* Reset body margin and padding to zero */
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f4f4f4; /* Light background color */
+        font-family: Arial, sans-serif; /* Set font */
+      }
+
+      /* Card container styling */
+      .card {
+        background: white; /* White background for the card */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow effect */
+        padding: 20px; /* Inner padding */
+        width: 100%; /* Responsive width */
+        max-width: 400px; /* Maximum width */
+      }
+
+      /* Heading style */
+      h2 {
+        margin-bottom: 20px; /* Space below the heading */
+        text-align: center; /* Center align the heading */
+      }
+
+      /* Input field styling */
+      input[type="text"],
+      input[type="password"] {
+        width: 100%; /* Full-width inputs */
+        padding: 10px; /* Inner padding */
+        margin: 10px 0; /* Margin for spacing */
+        border: 1px solid #ccc; /* Light gray border */
+        border-radius: 4px; /* Rounded corners */
+        font-size: 16px; /* Font size */
+      }
+
+      /* Button styling */
+      button {
+        width: 100%; /* Full-width button */
+        padding: 10px; /* Inner padding */
+        background: #28a745; /* Green background */
+        color: white; /* White text */
+        border: none; /* No border */
+        border-radius: 4px; /* Rounded corners */
+        cursor: pointer; /* Pointer cursor */
+        font-size: 16px; /* Font size */
+        transition: background 0.3s; /* Smooth transition */
+      }
+
+      button:hover {
+        background: #218838; /* Darker green on hover */
+      }
+
+      /* Paragraph and link styling */
+      p {
+        text-align: center; /* Center align paragraph text */
+      }
+
+      a {
+        color: #007bff; /* Blue color for links */
+        text-decoration: none; /* Remove underline */
+      }
+
+      a:hover {
+        text-decoration: underline; /* Underline on hover */
+      }
+    </style>
+  </head>
+  <body>
+    <!--link to my index1.html-->
+    <a href="index1.html"></a>
+    <div class="card">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <input
+          type="text"
+          id="username"
+          placeholder="Username or Email"
+          required
+        />
+        <input type="password" id="password" placeholder="Password" required />
+        <div>
+          <input type="checkbox" id="rememberMe" />
+          <label for="rememberMe" style="margin-left: 5px">Remember Me</label>
+        </div>
+        <button type="submit">Login</button>
+        <p>
+          Don't have an account?
+          <a href="#" id="createAccount">Create Account</a>
+        </p>
+      </form>
+    </div>
+
+    <script>
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault(); // Prevent form submission
+
+          // Get values from the form
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+          const rememberMe = document.getElementById("rememberMe").checked;
+
+          // Simple validation (in practice, you would check these with a server)
+          if (username === "" || password === "") {
+            alert("Please fill in both fields");
+            return;
+          }
+
+          // For demonstration, let's assume 'user' and 'pass' are the correct credentials
+          if (username === "user" && password === "pass") {
+            alert(
+              `Login successful!\nUsername: ${username}\nRemember Me: ${rememberMe}`
+            );
+            // Here, you can set a cookie/localStorage if remember me is checked
+            if (rememberMe) {
+              localStorage.setItem("username", username);
+            }
+          } else {
+            alert("Invalid credentials. Please try again.");
+          }
+        });
+
+      // Optionally handle the create account link
+      document
+        .getElementById("createAccount")
+        .addEventListener("click", function (e) {
+          e.preventDefault(); // Prevent default link behavior
+
+          // For demo, simulating an account creation action
+          alert("Redirecting to Create Account page...");
+        });
+
+      // Check if there's a saved username in localStorage and pre-fill
+      window.onload = function () {
+        const savedUsername = localStorage.getItem("username");
+        if (savedUsername) {
+          document.getElementById("username").value = savedUsername;
+          document.getElementById("rememberMe").checked = true;
+        }
+      };
+    </script>
+  </body>
+</html>
